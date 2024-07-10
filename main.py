@@ -27,7 +27,8 @@ def send_menu(message):
     button4 = types.KeyboardButton('/bot_instruction')
     button5 = types.KeyboardButton('/install_office')
     button6 = types.KeyboardButton('/install_vpn')
-    reply_markup.add(button1, button2, button3, button4, button5, button6)
+    button7 = types.KeyboardButton('/contact')
+    reply_markup.add(button1, button2, button3, button4, button5, button6, button7)
 
     bot.send_message(message.chat.id, "Что вас интересует? Выберите опцию из меню.", reply_markup=reply_markup)
 
@@ -62,7 +63,8 @@ def send_help(message):
     button4 = types.KeyboardButton('/bot_instruction')
     button5 = types.KeyboardButton('/install_office')
     button6 = types.KeyboardButton('/install_vpn')
-    reply_markup.add(button1, button2, button3, button4, button5, button6)
+    button7 = types.KeyboardButton('/contact')
+    reply_markup.add(button1, button2, button3, button4, button5, button6, button7)
 
     bot.send_message(message.chat.id, "Вот список команд:", reply_markup=reply_markup)
     bot.send_message(message.chat.id, (
@@ -71,7 +73,8 @@ def send_help(message):
         "/zoom_instruction - получить инструкцию по пользованию Zoom;\n"
         "/bot_instruction - получить инструкцию по созданию Telegram ботов;\n"
         "/install_office - получить инструкцию по установке MS Office;\n"
-        "/install_vpn - получить инструкцию по установке VPN."
+        "/install_vpn - получить инструкцию по установке VPN;\n"
+        "/contact - получить контактную информацию."
     ))
 
 
@@ -129,6 +132,22 @@ def send_install_vpn(message):
         "5. Войдите в приложение с помощью учетной записи и подключитесь к серверу VPN."
     )
     bot.send_message(message.chat.id, instruction)
+
+
+# Обработчик команды /contact
+@bot.message_handler(commands=['contact'])
+def send_contact(message):
+    contact_info = (
+        "Контактная информация:\n"
+        "634040, Россия, г. Томск,\n"
+        "ул. Высоцкого, 33\n"
+        "\n"
+        "Email: npp@mail.npptec.ru\n"
+        "Телефоны:\n"
+        "8 (3822) 63-38-37\n"
+        "8 (3822) 63-39-54"
+    )
+    bot.send_message(message.chat.id, contact_info)
 
 
 # Обработчик текстовых сообщений

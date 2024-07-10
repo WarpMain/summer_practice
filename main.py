@@ -23,7 +23,11 @@ def send_menu(message):
     reply_markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=False)
     button1 = types.KeyboardButton('/start')
     button2 = types.KeyboardButton('/help')
-    reply_markup.add(button1, button2)
+    button3 = types.KeyboardButton('/zoom_instruction')
+    button4 = types.KeyboardButton('/bot_instruction')
+    button5 = types.KeyboardButton('/install_office')
+    button6 = types.KeyboardButton('/install_vpn')
+    reply_markup.add(button1, button2, button3, button4, button5, button6)
 
     bot.send_message(message.chat.id, "Что вас интересует? Выберите опцию из меню.", reply_markup=reply_markup)
 
@@ -52,12 +56,79 @@ def callback_inline(call):
 def send_help(message):
     # Создание ReplyKeyboardMarkup
     reply_markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True, one_time_keyboard=False)
-    button1 = types.KeyboardButton('/start')
+    button1 = types.KeyboardButton('/menu')
     button2 = types.KeyboardButton('/help')
-    reply_markup.add(button1, button2)
+    button3 = types.KeyboardButton('/zoom_instruction')
+    button4 = types.KeyboardButton('/bot_instruction')
+    button5 = types.KeyboardButton('/install_office')
+    button6 = types.KeyboardButton('/install_vpn')
+    reply_markup.add(button1, button2, button3, button4, button5, button6)
 
     bot.send_message(message.chat.id, "Вот список команд:", reply_markup=reply_markup)
-    bot.send_message(message.chat.id, "/start - получить приветственное сообщение; \n/help - получить список команд;")
+    bot.send_message(message.chat.id, (
+        "/start - получить приветственное сообщение;\n"
+        "/help - получить список команд;\n"
+        "/zoom_instruction - получить инструкцию по пользованию Zoom;\n"
+        "/bot_instruction - получить инструкцию по созданию Telegram ботов;\n"
+        "/install_office - получить инструкцию по установке MS Office;\n"
+        "/install_vpn - получить инструкцию по установке VPN."
+    ))
+
+
+# Обработчик команды /zoom_instruction
+@bot.message_handler(commands=['zoom_instruction'])
+def send_zoom_instruction(message):
+    instruction = (
+        "Инструкция по пользованию Zoom:\n"
+        "1. Скачайте и установите приложение Zoom.\n"
+        "2. Зарегистрируйтесь или войдите в свой аккаунт.\n"
+        "3. Для участия в конференции введите ID встречи и пароль.\n"
+        "4. Используйте кнопки управления для включения/выключения камеры и микрофона.\n"
+        "5. Для завершения встречи нажмите 'Выйти'."
+    )
+    bot.send_message(message.chat.id, instruction)
+
+
+# Обработчик команды /bot_instruction
+@bot.message_handler(commands=['bot_instruction'])
+def send_bot_instruction(message):
+    instruction = (
+        "Инструкция по созданию Telegram бота:\n"
+        "1. Откройте Telegram и найдите @BotFather.\n"
+        "2. Отправьте команду /newbot и следуйте инструкциям для создания бота.\n"
+        "3. Получите токен вашего бота и сохраните его.\n"
+        "4. Используйте этот токен в вашем коде для взаимодействия с ботом.\n"
+        "5. Разработайте функции вашего бота и запустите его."
+    )
+    bot.send_message(message.chat.id, instruction)
+
+
+# Обработчик команды /install_office
+@bot.message_handler(commands=['install_office'])
+def send_install_office(message):
+    instruction = (
+        "Инструкция по установке MS Office:\n"
+        "1. Перейдите на официальный сайт Microsoft Office.\n"
+        "2. Войдите в свою учетную запись Microsoft или создайте новую.\n"
+        "3. Купите подписку на Office 365 или используйте пробную версию.\n"
+        "4. Скачайте установочный файл и запустите его.\n"
+        "5. Следуйте инструкциям мастера установки для завершения процесса."
+    )
+    bot.send_message(message.chat.id, instruction)
+
+
+# Обработчик команды /install_vpn
+@bot.message_handler(commands=['install_vpn'])
+def send_install_vpn(message):
+    instruction = (
+        "Инструкция по установке VPN:\n"
+        "1. Выберите надежный VPN-сервис (например, NordVPN, ExpressVPN).\n"
+        "2. Перейдите на сайт выбранного VPN-сервиса.\n"
+        "3. Зарегистрируйтесь и приобретите подписку.\n"
+        "4. Скачайте и установите приложение VPN на ваше устройство.\n"
+        "5. Войдите в приложение с помощью учетной записи и подключитесь к серверу VPN."
+    )
+    bot.send_message(message.chat.id, instruction)
 
 
 # Обработчик текстовых сообщений
